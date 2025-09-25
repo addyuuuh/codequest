@@ -12,8 +12,8 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mx-5">Level 35: Problem Solving</h2>
       <!-- Instruction Button -->
-      <button class="btn btn-light text-black" data-bs-toggle="modal" data-bs-target="#instructionModal">
-        Instructions
+      <button id="instructionBtn"  class="btn btn-light text-black" data-bs-toggle="modal" data-bs-target="#instructionModal">
+        <img src="img/info.png" class="img-fluid" width="30" height="30" alt="instruction">
       </button>
     </div>
   
@@ -65,7 +65,6 @@
 </ol>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -192,6 +191,9 @@
 
     // Show results with AI evaluations
     function showResults() {
+  const instructionBtn = document.getElementById("instructionBtn");
+  if (instructionBtn) instructionBtn.style.display = "none";
+
       const totalScore = evaluations.reduce((sum, eval) => sum + eval.score, 0);
       const maxScore = evaluations.length * 5;
       const percentage = ((totalScore / maxScore) * 100).toFixed(1);
@@ -250,7 +252,9 @@
       resultsHTML += `
           </div>
           <div class="mt-4 text-center">
-            <button class="btn btn-primary" onclick="location.reload()">Start Over</button>
+           <button class="btn btn-light" onclick="location.reload()">
+              <img src="img/retry.png" class="img-fluid" width="30" height="30" alt="retry">
+              </button>
           </div>
         </div>
       `;
@@ -298,6 +302,11 @@
 
     // Initialize
     loadQuestion();
+
+        document.addEventListener("DOMContentLoaded", function() {
+      const instructionModal = new bootstrap.Modal(document.getElementById('instructionModal'));
+      instructionModal.show();
+    });
   </script>
 </body>
 </html>
